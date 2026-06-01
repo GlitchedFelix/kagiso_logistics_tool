@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposal – LogiTrack Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 14px;
+      color: #1a1a2e;
+      background: #f4f6f9;
+      padding: 40px 20px;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: #fff;
+      padding: 40px 48px 32px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .brand { font-size: 26px; font-weight: 700; letter-spacing: 0.5px; }
+    .brand span { color: #e94560; }
+    .doc-label {
+      background: #e94560;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 4px;
+    }
+    .header-meta { display: flex; gap: 48px; }
+    .meta-item label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; display: block; margin-bottom: 4px; }
+    .meta-item span { font-size: 14px; font-weight: 600; }
+
+    /* Body */
+    .body { padding: 40px 48px; }
+
+    .section { margin-bottom: 36px; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #e94560;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #eee;
+    }
+    p { line-height: 1.75; color: #444; }
+
+    /* Parties */
+    .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .party-card {
+      background: #f8f9fc;
+      border-radius: 8px;
+      padding: 18px 20px;
+      border-left: 3px solid #0f3460;
+    }
+    .party-card.client { border-left-color: #e94560; }
+    .party-card h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 8px; }
+    .party-card strong { font-size: 15px; display: block; margin-bottom: 4px; }
+    .party-card span { color: #666; font-size: 13px; }
+
+    /* Features */
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: #f8f9fc;
+      border-radius: 7px;
+    }
+    .feature-icon {
+      width: 28px;
+      height: 28px;
+      background: #0f3460;
+      color: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .feature-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
+    .feature-text span { font-size: 12px; color: #666; line-height: 1.5; }
+
+    /* Pricing table */
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: #1a1a2e; color: #fff; }
+    thead th { padding: 12px 16px; text-align: left; font-size: 12px; letter-spacing: 0.5px; }
+    tbody tr { border-bottom: 1px solid #f0f0f0; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 13px 16px; font-size: 13px; color: #333; }
+    tbody tr:nth-child(even) { background: #fafafa; }
+    .amount { font-weight: 700; color: #0f3460; }
+    .included { color: #27ae60; font-weight: 600; font-size: 12px; }
+    tfoot tr { background: #0f3460; color: #fff; }
+    tfoot td { padding: 14px 16px; font-weight: 700; font-size: 14px; }
+
+    /* Terms */
+    .terms-list { list-style: none; padding: 0; }
+    .terms-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      padding-left: 20px;
+      position: relative;
+      color: #444;
+      line-height: 1.65;
+      font-size: 13px;
+    }
+    .terms-list li:last-child { border-bottom: none; }
+    .terms-list li::before {
+      content: '▸';
+      color: #e94560;
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, #f0f4ff, #e8f0fe);
+      border: 1px solid #c5d5f5;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    .highlight-box p { color: #1a1a2e; font-size: 13px; }
+    .highlight-box strong { color: #0f3460; }
+
+    /* Post-contract */
+    .post-card {
+      background: #fff8f0;
+      border: 1px solid #fde0b0;
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .post-card .icon { font-size: 28px; }
+    .post-card p { font-size: 13px; color: #555; line-height: 1.6; }
+    .post-card strong { color: #c0392b; }
+
+    /* Signature */
+    .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 16px; }
+    .sig-block label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #999; display: block; margin-bottom: 6px; }
+    .sig-block strong { display: block; font-size: 14px; margin-bottom: 4px; }
+    .sig-block span { font-size: 12px; color: #777; }
+    .sig-line { border-top: 1px solid #ccc; margin-top: 32px; padding-top: 6px; font-size: 11px; color: #aaa; }
+
+    /* Footer */
+    .footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 16px;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div class="brand">Logi<span>Track</span></div>
+        <div class="doc-label">Service Proposal</div>
+      </div>
+      <div class="header-meta">
+        <div class="meta-item">
+          <label>Proposal Date</label>
+          <span>1 June 2026</span>
+        </div>
+        <div class="meta-item">
+          <label>Proposal Ref</label>
+          <span>PROP-2026-001</span>
+        </div>
+        <div class="meta-item">
+          <label>Valid Until</label>
+          <span>30 June 2026</span>
+        </div>
+        <div class="meta-item">
+          <label>Contract Term</label>
+          <span>5 Months</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="body">
+
+      <!-- Parties -->
+      <div class="section">
+        <div class="section-title">Parties</div>
+        <div class="parties">
+          <div class="party-card">
+            <h4>Service Provider</h4>
+            <strong>GlitchedFelix</strong>
+            <span>glitcheddesignsinfo@gmail.com</span>
+          </div>
+          <div class="party-card client">
+            <h4>Client</h4>
+            <strong>Kagiso</strong>
+            <span>Transport Operator / Fleet Owner</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overview -->
+      <div class="section">
+        <div class="section-title">Overview</div>
+        <p>
+          This proposal outlines the terms for ongoing access, support, and maintenance of
+          <strong>LogiTrack</strong> — a custom-built owner dashboard designed specifically for
+          independent transport and freight operators in South Africa. LogiTrack gives you full
+          visibility into your trips, payouts, and expenses in one place, so you always know
+          exactly where your business stands.
+        </p>
+      </div>
+
+      <!-- What's Included -->
+      <div class="section">
+        <div class="section-title">What's Included</div>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-icon">🚚</div>
+            <div class="feature-text">
+              <strong>Trip Management</strong>
+              <span>Log, edit, and track Delivery, IBT, and MrT trips with automatic payout calculation.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📊</div>
+            <div class="feature-text">
+              <strong>Dashboard Analytics</strong>
+              <span>Live charts for income vs expenses, trip type breakdown, and 3-month cash flow forecast.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💰</div>
+            <div class="feature-text">
+              <strong>Smart Rate Card</strong>
+              <span>7 weight bands × 12 distance bands with long-distance override and 15% VAT handling.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🧾</div>
+            <div class="feature-text">
+              <strong>Expense Tracking</strong>
+              <span>Categorised expense logging (Fuel, Repairs, Breakages, Other) with KPI summaries.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📥</div>
+            <div class="feature-text">
+              <strong>Excel Export</strong>
+              <span>Export trips and expenses to formatted Excel files at any time.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-text">
+              <strong>Secure Access</strong>
+              <span>Email/password authentication via Supabase — your data stays private.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            <div class="feature-text">
+              <strong>Mobile Responsive</strong>
+              <span>Works on phone, tablet, and desktop — no app install needed.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⚙️</div>
+            <div class="feature-text">
+              <strong>Rate Card Updates</strong>
+              <span>Any rate card changes you need during the contract period are included at no extra cost.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="section">
+        <div class="section-title">Pricing &amp; Payment Schedule</div>
+        <div class="highlight-box">
+          <p>
+            <strong>Access &amp; onboarding training</strong> will be provided immediately upon receipt of the
+            first monthly payment. Subsequent payments are due on the 1st of each month.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Description</th>
+              <th>Due Date</th>
+              <th>Amount</th>
+              <th>Includes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Month 1 — Access + Training + Support</td>
+              <td>1 June 2026</td>
+              <td class="amount">R500.00</td>
+              <td class="included">✔ Access &amp; Training</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Month 2 — Support &amp; Maintenance</td>
+              <td>1 July 2026</td>
+              <td class="amount">R500.00</td>
+              <td class="included">✔ Rate Changes Included</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Month 3 — Support &amp; Maintenance</td>
+              <td>1 August 2026</td>
+              <td class="amount">R500.00</td>
+              <td class="included">✔ Rate Changes Included</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Month 4 — Support &amp; Maintenance</td>
+              <td>1 September 2026</td>
+              <td class="amount">R500.00</td>
+              <td class="included">✔ Rate Changes Included</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Month 5 — Support &amp; Maintenance</td>
+              <td>1 October 2026</td>
+              <td class="amount">R500.00</td>
+              <td class="included">✔ Rate Changes Included</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Total Contract Value</td>
+              <td>R2,500.00</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Post-Contract -->
+      <div class="section">
+        <div class="section-title">After the Contract Period</div>
+        <div class="post-card">
+          <div class="icon">📋</div>
+          <p>
+            Once the 5-month contract concludes, any <strong>rate card changes</strong> will be
+            charged at a fixed fee of <strong>R150.00 per update</strong>. All other support or
+            feature additions will be quoted separately. Continued access to the hosted dashboard
+            will be discussed and renewed at that time.
+          </p>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="section">
+        <div class="section-title">Terms &amp; Conditions</div>
+        <ul class="terms-list">
+          <li>Access and onboarding training are granted upon confirmed receipt of the first payment (Month 1).</li>
+          <li>Payments are due on the 1st of each month. Late payments may result in temporary suspension of access.</li>
+          <li>Rate card changes requested during the 5-month contract period are included at no additional cost.</li>
+          <li>After the contract period, rate card changes are charged at R150.00 per change.</li>
+          <li>The service provider retains the right to the underlying codebase. The client receives a usage licence for the duration of the agreement.</li>
+          <li>Either party may terminate this agreement with 30 days' written notice. Payments already made are non-refundable.</li>
+          <li>The service provider is not liable for data loss caused by incorrect use or third-party platform (Supabase) outages.</li>
+          <li>This proposal is valid until 30 June 2026. Acceptance after this date is subject to revised terms.</li>
+        </ul>
+      </div>
+
+      <!-- Signatures -->
+      <div class="section">
+        <div class="section-title">Acceptance</div>
+        <p style="margin-bottom: 20px; font-size: 13px; color: #555;">
+          By signing below, both parties agree to the terms outlined in this proposal.
+        </p>
+        <div class="sig-grid">
+          <div class="sig-block">
+            <label>Service Provider</label>
+            <strong>GlitchedFelix</strong>
+            <span>glitcheddesignsinfo@gmail.com</span>
+            <div class="sig-line">Signature &amp; Date</div>
+          </div>
+          <div class="sig-block">
+            <label>Client</label>
+            <strong>Kagiso</strong>
+            <span>&nbsp;</span>
+            <div class="sig-line">Signature &amp; Date</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="footer">
+      LogiTrack · Custom Logistics Dashboard · PROP-2026-001 · Confidential
+    </div>
+
+  </div>
+</body>
+</html>

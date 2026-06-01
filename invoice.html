@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice INV-2026-001 – LogiTrack</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 14px;
+      color: #1a1a2e;
+      background: #f4f6f9;
+      padding: 40px 20px;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: #fff;
+      padding: 40px 48px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .brand { font-size: 32px; font-weight: 700; letter-spacing: 0.5px; }
+    .brand span { color: #e94560; }
+    .invoice-meta { text-align: right; }
+    .invoice-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 6px;
+    }
+    .invoice-number { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .invoice-date { font-size: 13px; opacity: 0.75; }
+
+    /* Status banner */
+    .status-banner {
+      background: #fff8f0;
+      border-bottom: 3px solid #e94560;
+      padding: 12px 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .status-dot {
+      width: 10px; height: 10px;
+      background: #e94560;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .status-banner p { font-size: 13px; color: #333; font-weight: 600; }
+    .status-banner span { font-weight: 400; color: #666; }
+
+    /* Body */
+    .body { padding: 36px 48px; }
+
+    /* Bill to / from */
+    .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 36px; }
+    .party label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #aaa;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .party strong { font-size: 16px; display: block; margin-bottom: 4px; }
+    .party span { font-size: 13px; color: #666; display: block; line-height: 1.6; }
+
+    /* Line items */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+    thead tr { background: #1a1a2e; color: #fff; }
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    thead th:last-child { text-align: right; }
+    tbody tr { border-bottom: 1px solid #f0f0f0; }
+    tbody td { padding: 16px 16px; font-size: 13px; color: #333; vertical-align: top; }
+    tbody td:last-child { text-align: right; font-weight: 600; color: #0f3460; }
+    .item-desc { font-weight: 600; display: block; margin-bottom: 3px; }
+    .item-sub { font-size: 12px; color: #888; line-height: 1.5; }
+    .tag {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #27ae60;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-top: 4px;
+    }
+
+    /* Totals */
+    .totals-wrap { border-top: 2px solid #eee; }
+    .totals-row {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 16px;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 13px;
+    }
+    .totals-row .label { color: #888; margin-right: 64px; min-width: 120px; text-align: right; }
+    .totals-row .value { min-width: 80px; text-align: right; color: #333; }
+    .totals-row.total-due {
+      background: #0f3460;
+      color: #fff;
+      border-bottom: none;
+      padding: 14px 16px;
+    }
+    .totals-row.total-due .label { color: rgba(255,255,255,0.75); font-weight: 600; font-size: 14px; }
+    .totals-row.total-due .value { color: #fff; font-weight: 700; font-size: 18px; }
+
+    /* Payment details */
+    .payment-section { margin-top: 36px; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #e94560;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #eee;
+    }
+    .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .payment-field {
+      background: #f8f9fc;
+      border-radius: 7px;
+      padding: 14px 16px;
+    }
+    .payment-field label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; display: block; margin-bottom: 5px; }
+    .payment-field span { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+
+    /* Note box */
+    .note-box {
+      margin-top: 28px;
+      background: linear-gradient(135deg, #f0f4ff, #e8f0fe);
+      border: 1px solid #c5d5f5;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .note-box p { font-size: 13px; color: #333; line-height: 1.65; }
+    .note-box strong { color: #0f3460; }
+
+    /* Footer */
+    .footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 16px;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      margin-top: 40px;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <div class="brand">Logi<span>Track</span></div>
+      </div>
+      <div class="invoice-meta">
+        <div class="invoice-label">Invoice</div>
+        <div class="invoice-number">INV-2026-001</div>
+        <div class="invoice-date">Issued: 1 June 2026</div>
+      </div>
+    </div>
+
+    <!-- Status banner -->
+    <div class="status-banner">
+      <div class="status-dot"></div>
+      <p>Payment Due: <span>Upon Receipt — Access &amp; Training unlocked on payment.</span></p>
+    </div>
+
+    <div class="body">
+
+      <!-- Parties -->
+      <div class="parties">
+        <div class="party">
+          <label>From</label>
+          <strong>GlitchedFelix</strong>
+          <span>glitcheddesignsinfo@gmail.com</span>
+        </div>
+        <div class="party">
+          <label>Bill To</label>
+          <strong>Kagiso</strong>
+          <span>Transport Operator / Fleet Owner</span>
+        </div>
+      </div>
+
+      <!-- Line items -->
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th style="text-align:center; width:60px;">Qty</th>
+            <th style="text-align:right; width:90px;">Unit Price</th>
+            <th style="width:90px;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="item-desc">LogiTrack Dashboard — Month 1 of 5</span>
+              <span class="item-sub">
+                Platform access · Onboarding &amp; training session<br>
+                Ongoing support &amp; rate card updates included
+              </span>
+              <span class="tag">UNLOCKS ACCESS + TRAINING</span>
+            </td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:right;">R500.00</td>
+            <td>R500.00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Totals -->
+      <div class="totals-wrap">
+        <div class="totals-row">
+          <span class="label">Subtotal</span>
+          <span class="value">R500.00</span>
+        </div>
+        <div class="totals-row">
+          <span class="label">Tax / VAT</span>
+          <span class="value">R0.00</span>
+        </div>
+        <div class="totals-row total-due">
+          <span class="label">Total Due</span>
+          <span class="value">R500.00</span>
+        </div>
+      </div>
+
+      <!-- Payment details -->
+      <div class="payment-section">
+        <div class="section-title">Payment Details</div>
+        <div class="payment-grid">
+          <div class="payment-field">
+            <label>Payable To</label>
+            <span>GlitchedFelix</span>
+          </div>
+          <div class="payment-field">
+            <label>Amount Due</label>
+            <span>R500.00</span>
+          </div>
+          <div class="payment-field">
+            <label>Invoice Date</label>
+            <span>1 June 2026</span>
+          </div>
+          <div class="payment-field">
+            <label>Payment Terms</label>
+            <span>Due on Receipt</span>
+          </div>
+          <div class="payment-field">
+            <label>Invoice Reference</label>
+            <span>INV-2026-001</span>
+          </div>
+          <div class="payment-field">
+            <label>Contract Total</label>
+            <span>R2,500.00 (5 months)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note -->
+      <div class="note-box">
+        <p>
+          This is invoice <strong>1 of 5</strong> for the LogiTrack dashboard service agreement.
+          Payment of this invoice activates your account and schedules your onboarding and training session.
+          Subsequent invoices (INV-2026-002 through INV-2026-005) will be issued monthly at <strong>R500.00 each</strong>,
+          with rate card changes included throughout the contract period.
+          After the contract ends, rate card updates are available at <strong>R150.00 per change</strong>.
+        </p>
+      </div>
+
+    </div><!-- /body -->
+
+    <div class="footer">
+      LogiTrack · INV-2026-001 · glitcheddesignsinfo@gmail.com · Thank you for your business.
+    </div>
+
+  </div>
+</body>
+</html>
