@@ -19,10 +19,10 @@ const LIGHT_BANDS = [
 ];
 
 const HEAVY_PER_TON_RATES = [412, 495, 528, 626, 655, 698, 742, 781, 858, 1047, 1076, 1105];
-const IBT_PER_TON_RATES = [250, 333, 366, 432, 536, 565, 582, 615, 681, 811, 831, 873];
+const OTO_PER_TON_RATES = [250, 333, 366, 432, 536, 565, 582, 615, 681, 811, 831, 873];
 
 const LONG_DISTANCE_THRESHOLD = 150; // km
-const LONG_DISTANCE_RATE = 34;       // R per km
+const LONG_DISTANCE_RATE = 23;       // R per km
 
 // Payout markdown (e.g. 15% VAT deduction). Set to 0 for full rate.
 const PAYOUT_MARKDOWN_PCT = 15;
@@ -50,8 +50,8 @@ function calcPayoutValue(type, distKm, weightKg) {
   } else {
     const di = getDistIndex(distKm);
 
-    if (type === 'IBT') {
-      raw = IBT_PER_TON_RATES[di] * (weightKg / 1000);
+    if (type === 'OTO') {
+      raw = OTO_PER_TON_RATES[di] * (weightKg / 1000);
     } else if (weightKg > 999) {
       raw = HEAVY_PER_TON_RATES[di] * (weightKg / 1000);
     } else {
@@ -277,7 +277,7 @@ function renderDashboard() {
 
   // Trip breakdown
   setText('m-deliveries', trips.filter(t => t.trip_type === 'Delivery').length);
-  setText('m-ibts', trips.filter(t => t.trip_type === 'IBT').length);
+  setText('m-ibts', trips.filter(t => t.trip_type === 'OTO').length);
   setText('m-mrts', trips.filter(t => t.trip_type === 'MrT').length);
   setText('m-longdist', trips.filter(t => isLongDistance(t.distance_km || 0)).length);
   setText('m-online', trips.filter(t => t.status === 'Online').length);
@@ -304,7 +304,7 @@ const COL = {
   expenseLine: '#e5604b',
   net: '#3b6cf6',
   delivery: 'rgba(59,130,246,.85)',
-  ibt: 'rgba(224,151,43,.9)',
+  oto: 'rgba(224,151,43,.9)',
   mrt: 'rgba(229,96,75,.85)',
   local: 'rgba(59,130,246,.85)',
   long: 'rgba(224,151,43,.9)',
@@ -452,13 +452,13 @@ function buildExpenseCatChart(expenses) {
 }
 
 function buildTripTypesChart(trips) {
-  const types = ['Delivery', 'IBT', 'MrT'];
-  const colByType = { Delivery: COL.delivery, IBT: COL.ibt, MrT: COL.mrt };
+  const types = ['Delivery', 'OTO', 'MrT'];
+  const colByType = { Delivery: COL.delivery, OTO: COL.oto, MrT: COL.mrt };
   const byMonth = {};
   trips.forEach(t => {
     const k = (t.trip_date || '').slice(0, 7);
     if (!k) return;
-    byMonth[k] ||= { Delivery: 0, IBT: 0, MrT: 0 };
+    byMonth[k] ||= { Delivery: 0, OTO: 0, MrT: 0 };
     if (byMonth[k][t.trip_type] !== undefined) byMonth[k][t.trip_type] += 1;
   });
   const labels = Object.keys(byMonth).sort();
@@ -577,7 +577,7 @@ function calcPayout() {
   if (badge && ldText) {
     const ld = isLongDistance(dist);
     badge.classList.toggle('active', ld);
-    ldText.textContent = ld ? '✓ Active — R34/km' : 'Inactive (≤150km)';
+    ldText.textContent = ld ? '✓ Active — R23/km' : 'Inactive (≤150km)';
   }
   return payout;
 }
@@ -671,7 +671,7 @@ function renderTripsTable(trips) {
       <td data-label="Date"><input type="date" value="${t.trip_date}" onchange="updateTripField('${t.id}','trip_date',this.value)"></td>
       <td data-label="Type">
         <select onchange="updateTripField('${t.id}','trip_type',this.value)">
-          ${['Delivery', 'IBT', 'MrT'].map(v => `<option${v === t.trip_type ? ' selected' : ''}>${v}</option>`).join('')}
+          ${['Delivery', 'OTO', 'MrT'].map(v => `<option${v === t.trip_type ? ' selected' : ''}>${v}</option>`).join('')}
         </select>
       </td>
       <td data-label="Status">
