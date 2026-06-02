@@ -50,7 +50,7 @@ function calcPayoutValue(type, distKm, weightKg) {
   } else {
     const di = getDistIndex(distKm);
 
-    if (type === 'OTO') {
+    if (type === 'OTO' && weightKg > 999) {
       raw = OTO_PER_TON_RATES[di] * (weightKg / 1000);
     } else if (weightKg > 999) {
       raw = HEAVY_PER_TON_RATES[di] * (weightKg / 1000);
