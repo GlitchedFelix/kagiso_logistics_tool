@@ -313,6 +313,7 @@ const COL = {
   breakages: 'rgba(229,96,75,.85)',
   repairs: 'rgba(59,130,246,.85)',
   other: 'rgba(154,167,184,.85)',
+  salary: 'rgba(138,99,210,.85)',
 };
 
 function setupChartDefaults() {
@@ -428,8 +429,8 @@ function buildProjectionChart(trips, expenses) {
 }
 
 function buildExpenseCatChart(expenses) {
-  const cats = ['Fuel', 'Breakages', 'Repairs', 'Other'];
-  const colByCat = { Fuel: COL.fuel, Breakages: COL.breakages, Repairs: COL.repairs, Other: COL.other };
+  const cats = ['Fuel', 'Breakages', 'Repairs', 'Salary', 'Other'];
+  const colByCat = { Fuel: COL.fuel, Breakages: COL.breakages, Repairs: COL.repairs, Salary: COL.salary, Other: COL.other };
   const totals = cats.map(c => round2(sum(expenses.filter(e => e.category === c), e => e.amount)));
 
   const labels = [], data = [], colors = [];
@@ -754,7 +755,7 @@ function renderExpensesTable(rows) {
       <td data-label="Date"><input type="date" value="${e.expense_date}" onchange="updateExpenseField('${e.id}','expense_date',this.value)"></td>
       <td data-label="Category">
         <select onchange="updateExpenseField('${e.id}','category',this.value)">
-          ${['Fuel', 'Breakages', 'Repairs', 'Other'].map(c => `<option${c === e.category ? ' selected' : ''}>${c}</option>`).join('')}
+          ${['Fuel', 'Breakages', 'Repairs', 'Salary', 'Other'].map(c => `<option${c === e.category ? ' selected' : ''}>${c}</option>`).join('')}
         </select>
       </td>
       <td data-label="Amount" style="color:var(--accent2)">
