@@ -277,7 +277,7 @@ function renderDashboard() {
 
   // Trip breakdown
   setText('m-deliveries', trips.filter(t => t.trip_type === 'Delivery').length);
-  setText('m-ibts', trips.filter(t => t.trip_type === 'OTO').length);
+  setText('m-otos', trips.filter(t => t.trip_type === 'OTO').length);
   setText('m-mrts', trips.filter(t => t.trip_type === 'MrT').length);
   setText('m-longdist', trips.filter(t => isLongDistance(t.distance_km || 0)).length);
   setText('m-online', trips.filter(t => t.status === 'Online').length);
