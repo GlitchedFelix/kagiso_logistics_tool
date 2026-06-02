@@ -454,13 +454,13 @@ function buildExpenseCatChart(expenses) {
 }
 
 function buildTripTypesChart(trips) {
-  const types = ['Delivery', 'OTO', 'MrT'];
-  const colByType = { Delivery: COL.delivery, OTO: COL.oto, MrT: COL.mrt };
+  const types = ['Delivery', 'OTO'];
+  const colByType = { Delivery: COL.delivery, OTO: COL.oto };
   const byMonth = {};
   trips.forEach(t => {
     const k = (t.trip_date || '').slice(0, 7);
     if (!k) return;
-    byMonth[k] ||= { Delivery: 0, OTO: 0, MrT: 0 };
+    byMonth[k] ||= { Delivery: 0, OTO: 0 };
     if (byMonth[k][t.trip_type] !== undefined) byMonth[k][t.trip_type] += 1;
   });
   const labels = Object.keys(byMonth).sort();
@@ -673,7 +673,7 @@ function renderTripsTable(trips) {
       <td data-label="Date"><input type="date" value="${t.trip_date}" onchange="updateTripField('${t.id}','trip_date',this.value)"></td>
       <td data-label="Type">
         <select onchange="updateTripField('${t.id}','trip_type',this.value)">
-          ${['Delivery', 'OTO', 'MrT'].map(v => `<option${v === t.trip_type ? ' selected' : ''}>${v}</option>`).join('')}
+          ${['Delivery', 'OTO'].map(v => `<option${v === t.trip_type ? ' selected' : ''}>${v}</option>`).join('')}
         </select>
       </td>
       <td data-label="Status">
