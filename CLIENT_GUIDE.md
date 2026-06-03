@@ -20,30 +20,7 @@ Your logistics dashboard for tracking trips, expenses, and profitability.
 
 ## 1. Signing In
 
-Open the app link in your browser. You'll see the login screen:
-
-```
-┌──────────────────────────────────────┐
-│                                      │
-│         🚛  LogiTrack                │
-│         Owner Dashboard              │
-│                                      │
-│   Email                              │
-│   ┌──────────────────────────────┐   │
-│   │ you@example.com              │   │
-│   └──────────────────────────────┘   │
-│                                      │
-│   Password                           │
-│   ┌──────────────────────────────┐   │
-│   │ ••••••••••                   │   │
-│   └──────────────────────────────┘   │
-│                                      │
-│   [ Sign In ]                        │
-│                                      │
-└──────────────────────────────────────┘
-```
-
-Enter your email and password, then click **Sign In**. You'll land on the Dashboard.
+Open the app link in your browser. Enter your email and password, then click **Sign In**. You'll land on the Dashboard.
 
 > Your login credentials are provided separately. If you can't log in, contact your administrator.
 
@@ -52,30 +29,6 @@ Enter your email and password, then click **Sign In**. You'll land on the Dashbo
 ## 2. The Dashboard
 
 The Dashboard is your financial overview. All numbers update automatically based on your selected date range.
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│  🚛 LogiTrack                            [ Jan 2026 – Mar 2026 ▼ ]  │
-├──────────────────────────────────────────────────────────────────── │
-│  [ 📊 Dashboard ]  [ 🚛 Trips ]  [ 💸 Expenses ]  [ 📋 Charts ]    │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│   ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐  │
-│   │  INCOME    │  │  EXPENSES  │  │ NET PROFIT │  │  MARGIN %  │  │
-│   │  R 48,250  │  │  R 12,800  │  │  R 35,450  │  │   73.5%    │  │
-│   └────────────┘  └────────────┘  └────────────┘  └────────────┘  │
-│                                                                     │
-│   ┌────────────┐  ┌────────────┐  ┌───────────────────────────┐   │
-│   │   TRIPS    │  │  AVG PAY   │  │  THIS MONTH               │   │
-│   │     35     │  │  R 1,379   │  │  Income R12,100            │   │
-│   └────────────┘  └────────────┘  │  Net    R 9,200           │   │
-│                                   └───────────────────────────┘   │
-│                                                                     │
-│   Deliveries: 22   OTOs: 8   Long Distance: 5                      │
-│   Online: 28       Manual: 7                                       │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-```
 
 ### What each number means
 
@@ -96,28 +49,6 @@ The **trip breakdown** below the cards tells you at a glance how many were stand
 ## 3. Logging a Trip
 
 Go to the **🚛 Trips** tab and click **+ Add Trip**.
-
-```
-┌────────────────────────────────────────────────┐
-│  Add Trip                                      │
-│  ────────────────────────────────────────────  │
-│  Date           [ 2026-06-03 ]                 │
-│  Trip Type      [ Delivery ▼ ]                 │
-│  Status         [ Online ▼  ]                  │
-│  Invoice #      [ INV-0042  ]                  │
-│  Trip ID        [ T-0099    ]                  │
-│  Distance (km)  [ 85        ]                  │
-│  Weight (kg)    [ 350       ]                  │
-│                                                │
-│  Payout ──────► R 573.16   ← calculated for you│
-│                                                │
-│  Grouped Invoices  [ INV-0040, INV-0041 ]      │
-│  Grouped Trip IDs  [ T-0097, T-0098     ]      │
-│  Notes             [ Sandton to Midrand ]      │
-│                                                │
-│  [ Cancel ]                  [ Save Trip ]     │
-└────────────────────────────────────────────────┘
-```
 
 ### Field guide
 
@@ -148,19 +79,6 @@ Any trip over **150 km** is automatically treated as long distance and billed at
 
 Go to the **💸 Expenses** tab and click **+ Add Expense**.
 
-```
-┌────────────────────────────────────────────────┐
-│  Add Expense                                   │
-│  ────────────────────────────────────────────  │
-│  Date        [ 2026-06-03 ]                    │
-│  Category    [ Fuel ▼     ]                    │
-│  Amount (R)  [ 1250.00    ]                    │
-│  Description [ Diesel fillup — Truck 1 ]       │
-│                                                │
-│  [ Cancel ]                [ Save Expense ]    │
-└────────────────────────────────────────────────┘
-```
-
 ### Expense categories
 
 | Category | Use it for |
@@ -179,22 +97,7 @@ Every expense you log is deducted from your net profit on the Dashboard and incl
 
 The **date range selector** in the top-right corner controls every tab — the Dashboard KPIs, the Trips list, Expenses list, and all Charts all update together.
 
-```
-┌──────────────────────────────────────────────────┐
-│  Date Range                                      │
-│  ──────────────────────────────────────────────  │
-│  From  [ 2026-01-01 ]     To  [ 2026-03-31 ]     │
-│                                                  │
-│  [ This Month ]  [ Last Month ]  [ Year to Date ]│
-│                                                  │
-│  Saved ranges                                    │
-│  ┌──────────────────────┐                        │
-│  │  📌 Q1 2026          │  ×                     │
-│  │  📌 Jan Review       │  ×                     │
-│  └──────────────────────┘                        │
-│                     [ + Save This Range ]        │
-└──────────────────────────────────────────────────┘
-```
+Use the quick-select buttons (**This Month**, **Last Month**, **Year to Date**) for common periods, or set custom **From** and **To** dates manually.
 
 ### Saving a date range
 
@@ -210,54 +113,21 @@ If you regularly pull the same period (e.g. every quarter, every payroll cycle):
 
 The **📋 Charts** tab gives you five visual breakdowns of your business, all filtered by your selected date range.
 
----
-
 ### Income vs Expenses vs Net
 
 A monthly bar chart with a net profit line overlay. Use this to see at a glance whether your income is growing faster than your costs.
 
-```
-R
-50k │      ████                       ─── Net profit
-40k │      ████  ─────────────────
-30k │ ████ ████
-20k │ ████ ████ ████
-10k │ ████ ████ ████  ░░░  ░░░  ░░░
-  0 └────────────────────────────────
-     Jan   Feb   Mar  Apr  May  Jun
-         ████ Income   ░░░ Expenses
-```
-
----
-
 ### 3-Month Projection
 
-Shows where your income and expenses are heading based on your recent trend. The solid lines are your real data; the dashed lines are the forecast.
-
-```
-R
-60k │                        ╌╌╌╌╌╌
-50k │              ──────────
-40k │    ──────────
-30k │────
-  0 └─────────────────────────────────
-     Jan  Feb  Mar │ Apr  May  Jun
-                   ↑ forecast starts
-```
-
----
+Shows where your income and expenses are heading based on your recent trend. Solid lines are your real data; dashed lines are the forecast for the next three months.
 
 ### Expense Breakdown
 
 A doughnut chart showing what proportion of your total spend goes to each category (Fuel, Repairs, Salary, etc.).
 
----
-
 ### Delivery Tracking
 
 A stacked monthly bar showing how many Delivery vs OTO trips you ran each month. Useful for spotting which service type is driving your volume.
-
----
 
 ### Local vs Long Distance
 
@@ -274,13 +144,7 @@ The downloaded file contains:
 - An **Expenses** sheet with every column and a total amount row at the bottom
 - Currency formatted as `R #,##0.00`
 
-**Filename examples:**
-```
-logitrack-trips-2026-06-03.xlsx
-logitrack-expenses-2026-06-03.xlsx
-```
-
-> The export includes all records, not just what's visible in your current date filter. You can then filter or sort in Excel as needed.
+> The export includes all records, not just what's visible in your current date filter. You can filter or sort further in Excel as needed.
 
 ---
 
@@ -289,16 +153,6 @@ logitrack-expenses-2026-06-03.xlsx
 ### Editing a trip or expense
 
 Click the **✏ Edit** button on any row. The row opens as an inline form directly in the table — change what you need, then click **Save**. Payout recalculates automatically if you change distance or weight.
-
-```
-Before:
-┌──────────────────────────────────────────────────────────────┐
-│ 15 Jan  │  Delivery  │  Online  │  INV-001  │  85km  │  350kg │ R 573  │ [Edit] [Del] │
-
-After clicking Edit:
-┌──────────────────────────────────────────────────────────────┐
-│ [15 Jan] │ [Delivery▼] │ [Online▼] │ [INV-001] │ [85] │ [350] │ R 573.16 │ [✔ Save] [✖] │
-```
 
 ### Deleting a record
 
@@ -310,33 +164,9 @@ Click the **🗑 Delete** button on the row. You'll be asked to confirm before i
 
 LogiTrack works on phones and tablets. On smaller screens the layout adapts automatically:
 
-- Navigation moves to a **bottom bar** (tap the icons at the bottom to switch tabs)
-- The trips and expenses tables become **stacked cards** — one card per record
+- Navigation moves to a **bottom bar** — tap the icons at the bottom to switch tabs
+- The trips and expenses tables become **stacked cards**, one card per record
 - All buttons and inputs are sized for touch
-
-```
-┌─────────────────────────┐
-│  🚛 LogiTrack      [⚙]  │
-├─────────────────────────┤
-│  Income     R 48,250    │
-│  Expenses   R 12,800    │
-│  Net        R 35,450    │
-│  Margin     73.5%       │
-│                         │
-│  ┌─────────────────────┐│
-│  │ 15 Jan 2026         ││
-│  │ Delivery · Online   ││
-│  │ 85 km · 350 kg      ││
-│  │ Payout: R 573.16    ││
-│  │  [ Edit ]  [ Del ]  ││
-│  └─────────────────────┘│
-│  ┌─────────────────────┐│
-│  │ ...                 ││
-│  └─────────────────────┘│
-├─────────────────────────┤
-│  [📊]  [🚛]  [💸]  [📋] │
-└─────────────────────────┘
-```
 
 ---
 
