@@ -1,5 +1,5 @@
 /* ================================================================
-   LogiTrack — app.js
+   FleetLedger — app.js
    Supabase CRUD · Rate Card Math · Owner Dashboard · Chart.js
    ================================================================ */
 
@@ -830,7 +830,7 @@ function exportTripsExcel() {
     'Grouped Trip IDs': t.grouped_trip_ids || '',
     Notes: t.notes || '',
   }));
-  exportSheet(rows, 'Trips', 'logitrack-trips', { 'Payout (R)': true });
+  exportSheet(rows, 'Trips', 'fleetledger-trips', { 'Payout (R)': true });
 }
 
 function exportExpensesExcel() {
@@ -841,7 +841,7 @@ function exportExpensesExcel() {
     'Amount (R)': round2(e.amount),
     Description: e.description || '',
   }));
-  exportSheet(rows, 'Expenses', 'logitrack-expenses', { 'Amount (R)': true });
+  exportSheet(rows, 'Expenses', 'fleetledger-expenses', { 'Amount (R)': true });
 }
 
 // rows: array of flat objects; totalCols: {colName:true} to append a TOTAL row
@@ -896,7 +896,7 @@ function renderSavedRanges(ranges) {
         <span class="ri-label">${esc(r.label)}</span>
         <span class="ri-dates">${r.start_date} → ${r.end_date}</span>
       </span>
-      <span class="ri-del" title="Delete range" onclick="deleteRange(event,'${r.id}')">🗑</span>
+      <span class="ri-del" title="Delete range" onclick="deleteRange(event,'${r.id}')">&#x1F5D1;</span>
     </button>`).join('');
 }
 

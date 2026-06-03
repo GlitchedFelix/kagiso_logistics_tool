@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#3b6cf6" />
-  <title>LogiTrack — Owner Dashboard</title>
+  <title>FleetLedger — Owner Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1269,7 +1269,7 @@
     <!-- HEADER -->
     <header>
       <div class="logo">
-        <h1>Logi<span>Track</span></h1>
+        <h1>Fleet<span>Ledger</span></h1>
       </div>
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
         <div class="db-status">
@@ -1282,7 +1282,7 @@
 
     <!-- SETUP BANNER -->
     <div id="setup-banner" class="hidden">
-      <strong>⚡ Setup Required:</strong> Enter your Supabase URL &amp; Anon Key to connect. Click ⚙ Config above.
+      <strong>&#x26A1; Setup Required:</strong> Enter your Supabase URL &amp; Anon Key to connect. Click &#x2699; Config above.
     </div>
 
     <!-- TABS -->
@@ -1324,7 +1324,7 @@
         </div>
         <button class="btn btn-accent" onclick="applyFilters()">Apply</button>
         <button class="btn btn-ghost" onclick="clearFilters()">Clear</button>
-        <button class="btn btn-ghost" onclick="openRangesModal()">📅 Saved Ranges</button>
+        <button class="btn btn-ghost" onclick="openRangesModal()">&#x1F4C5; Saved Ranges</button>
       </div>
 
       <!-- KPIs — FINANCIAL -->
@@ -1339,7 +1339,7 @@
         <div class="metric-card">
           <div class="metric-label">Expenses</div>
           <div class="metric-value red" id="m-expenses">—</div>
-          <div class="metric-sub" id="m-expenses-sub">fuel · repairs · etc</div>
+          <div class="metric-sub" id="m-expenses-sub">fuel &middot; repairs &middot; etc</div>
         </div>
         <div class="metric-card">
           <div class="metric-label">Net Profit</div>
@@ -1396,7 +1396,7 @@
         <div class="chart-wrap full">
           <div class="chart-head">
             <span class="section-label">Income vs Expenses vs Net</span>
-            <span class="hint">Monthly · bars = income/expenses, line = net profit</span>
+            <span class="hint">Monthly &middot; bars = income/expenses, line = net profit</span>
           </div>
           <div class="chart-canvas-box tall">
             <canvas id="chart-income-expense"></canvas>
@@ -1454,7 +1454,7 @@
     <!-- ══ TAB: ADD TRIP ══ -->
     <div class="tab-panel" id="tab-add-trip">
       <div class="form-card">
-        <h3>🚛 Log New Trip</h3>
+        <h3>&#x1F69B; Log New Trip</h3>
         <div class="sub">Enter distance &amp; weight — payout is calculated automatically from the rate card (15%
           markdown applied).</div>
         <div class="form-grid" id="trip-form">
@@ -1525,7 +1525,7 @@
           </div>
           <div class="form-actions">
             <button class="btn btn-ghost" onclick="resetForm()">Reset</button>
-            <button class="btn btn-green" onclick="submitTrip()">✓ Save Trip</button>
+            <button class="btn btn-green" onclick="submitTrip()">&#x2713; Save Trip</button>
           </div>
         </div>
       </div>
@@ -1538,8 +1538,8 @@
           <h3>All Trips</h3>
           <div style="display:flex;gap:8px;align-items:center;">
             <span id="trips-count" style="font-size:.78rem;color:var(--text-dim)"></span>
-            <button class="btn btn-ghost" onclick="loadTrips()">↻ Refresh</button>
-            <button class="btn btn-accent" onclick="exportTripsExcel()">⤓ Export Excel</button>
+            <button class="btn btn-ghost" onclick="loadTrips()">&#x21BB; Refresh</button>
+            <button class="btn btn-accent" onclick="exportTripsExcel()">&#x2913; Export Excel</button>
           </div>
         </div>
         <div style="overflow-x:auto;">
@@ -1562,7 +1562,7 @@
               <tr>
                 <td colspan="10">
                   <div class="empty-state">
-                    <div class="icon">📋</div>
+                    <div class="icon">&#x1F4CB;</div>
                     <p>No trips yet.</p>
                   </div>
                 </td>
@@ -1580,8 +1580,8 @@
           <h3>All Expenses</h3>
           <div style="display:flex;gap:8px;align-items:center;">
             <span id="expenses-count" style="font-size:.78rem;color:var(--text-dim)"></span>
-            <button class="btn btn-ghost" onclick="loadExpenses()">↻ Refresh</button>
-            <button class="btn btn-ghost" onclick="exportExpensesExcel()">⤓ Export Excel</button>
+            <button class="btn btn-ghost" onclick="loadExpenses()">&#x21BB; Refresh</button>
+            <button class="btn btn-ghost" onclick="exportExpensesExcel()">&#x2913; Export Excel</button>
             <button class="btn btn-accent" onclick="toggleExpenseForm()">+ Add Expense</button>
           </div>
         </div>
@@ -1633,7 +1633,7 @@
               <tr>
                 <td colspan="5">
                   <div class="empty-state">
-                    <div class="icon">💸</div>
+                    <div class="icon">&#x1F4B8;</div>
                     <p>No expenses yet.</p>
                   </div>
                 </td>
@@ -1648,10 +1648,10 @@
 
   <!-- BOTTOM NAV (mobile only — hidden on desktop via CSS) -->
   <nav class="bottom-nav">
-    <button class="tab-btn bn-btn active" data-tab="dashboard"><span>📊</span>Dashboard</button>
-    <button class="tab-btn bn-btn" data-tab="add-trip"><span>＋</span>Add</button>
-    <button class="tab-btn bn-btn" data-tab="trips-list"><span>📋</span>Trips</button>
-    <button class="tab-btn bn-btn" data-tab="expenses-list"><span>💸</span>Expenses</button>
+    <button class="tab-btn bn-btn active" data-tab="dashboard"><span>&#x1F4CA;</span>Dashboard</button>
+    <button class="tab-btn bn-btn" data-tab="add-trip"><span>&#xFF0B;</span>Add</button>
+    <button class="tab-btn bn-btn" data-tab="trips-list"><span>&#x1F4CB;</span>Trips</button>
+    <button class="tab-btn bn-btn" data-tab="expenses-list"><span>&#x1F4B8;</span>Expenses</button>
   </nav>
 
   <!-- TOAST -->
@@ -1662,7 +1662,7 @@
   <!-- SAVED RANGES (SELECT) MODAL -->
   <div class="modal-overlay" id="ranges-modal">
     <div class="modal">
-      <h3>📅 Saved Date Ranges</h3>
+      <h3>&#x1F4C5; Saved Date Ranges</h3>
       <p style="font-size:.78rem;color:var(--text-dim);margin:-8px 0 14px;">Tap a range to apply it to the dashboard.
       </p>
       <div class="saved-ranges" id="saved-ranges-list">
@@ -1670,7 +1670,7 @@
       </div>
       <div class="modal-actions">
         <button class="btn btn-ghost" onclick="closeRangesModal()">Close</button>
-        <button class="btn btn-accent" onclick="openSaveRangeModal()">💾 Save Current Range</button>
+        <button class="btn btn-accent" onclick="openSaveRangeModal()">&#x1F4BE; Save Current Range</button>
       </div>
     </div>
   </div>
@@ -1678,7 +1678,7 @@
   <!-- SAVE RANGE MODAL -->
   <div class="modal-overlay" id="save-range-modal">
     <div class="modal">
-      <h3>💾 Save Date Range</h3>
+      <h3>&#x1F4BE; Save Date Range</h3>
       <div class="form-group"><label>Label</label><input type="text" id="range-label" placeholder="e.g. April 2025">
       </div>
       <div class="form-group"><label>Start Date</label><input type="date" id="range-start"></div>
@@ -1693,7 +1693,7 @@
   <!-- SUPABASE CONFIG MODAL -->
   <div class="modal-overlay" id="setup-modal">
     <div class="modal">
-      <h3>⚙ Supabase Config</h3>
+      <h3>&#x2699; Supabase Config</h3>
       <div class="form-group"><label>Supabase URL</label><input type="text" id="sb-url"
           placeholder="https://xxxx.supabase.co"></div>
       <div class="form-group"><label>Anon Key</label><input type="text" id="sb-key" placeholder="eyJ..."></div>
@@ -1709,9 +1709,9 @@
   <div id="login-screen">
     <div class="login-card">
       <div class="login-logo">
-        <div class="logo-icon">🚛</div>
+        <div class="logo-icon">&#x1F69B;</div>
         <h1 style="font-family:var(--font-head);font-size:1.3rem;font-weight:800;letter-spacing:-.02em;">
-          Logi<span style="color:var(--accent)">Track</span>
+          Fleet<span style="color:var(--accent)">Ledger</span>
         </h1>
       </div>
       <p class="login-sub">Owner Dashboard &mdash; sign in to continue</p>
@@ -1721,7 +1721,7 @@
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+        <input type="password" id="login-password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password">
       </div>
       <p id="login-error" class="login-error"></p>
       <button class="btn btn-accent" id="login-btn" onclick="signIn()">Sign In</button>
