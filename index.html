@@ -1212,6 +1212,20 @@
       display: none;
     }
 
+    #set-password-screen {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      z-index: 500;
+      padding: 24px;
+    }
+
+    #set-password-screen.hidden {
+      display: none;
+    }
+
     .login-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -1725,6 +1739,29 @@
       </div>
       <p id="login-error" class="login-error"></p>
       <button class="btn btn-accent" id="login-btn" onclick="signIn()">Sign In</button>
+    </div>
+  </div>
+
+  <!-- SET PASSWORD SCREEN (invite / password recovery) -->
+  <div id="set-password-screen" class="hidden">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon">&#x1F69B;</div>
+        <h1 style="font-family:var(--font-head);font-size:1.3rem;font-weight:800;letter-spacing:-.02em;">
+          Fleet<span style="color:var(--accent)">Ledger</span>
+        </h1>
+      </div>
+      <p class="login-sub">Choose a password to activate your account</p>
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="set-password-input" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="set-password-confirm" placeholder="Repeat password" autocomplete="new-password">
+      </div>
+      <p id="set-password-error" class="login-error"></p>
+      <button class="btn btn-accent" id="set-password-btn" onclick="setPassword()">Set Password</button>
     </div>
   </div>
 
