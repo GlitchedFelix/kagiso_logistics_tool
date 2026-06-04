@@ -98,8 +98,12 @@ async function initSupabase(url, key) {
   try {
     db = window.supabase.createClient(url, key);
 
-    // Handle future sign-in / sign-out events
+    const hashParams = new URLSearchParams(window.location.hash.slice(1));
+    const isInvite = hashParams.get('type') === 'invite';
+
     db.auth.onAuthStateChange((event, session) => {
+      if (event === 'PASSWORD_RECOVERY') { showSetPassword(); return; }
+      if (event === 'SIGNED_IN' && isInvite) { showSetPassword(); return; }
       if (event === 'SIGNED_IN') { showApp(); loadAll(); }
       if (event === 'SIGNED_OUT') { showLogin(); }
     });
@@ -153,10 +157,12 @@ async function signOut() {
 
 function showApp() {
   document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('set-password-screen').classList.add('hidden');
   document.getElementById('main-app').style.display = '';
 }
 
 function showLogin() {
+  document.getElementById('set-password-screen').classList.add('hidden');
   document.getElementById('login-screen').classList.remove('hidden');
   document.getElementById('main-app').style.display = 'none';
   document.getElementById('login-error').textContent = '';
@@ -164,6 +170,44 @@ function showLogin() {
   const btn = document.getElementById('login-btn');
   btn.textContent = 'Sign In';
   btn.disabled = false;
+}
+
+function showSetPassword() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('main-app').style.display = 'none';
+  document.getElementById('set-password-screen').classList.remove('hidden');
+}
+
+async function setPassword() {
+  const pwd = document.getElementById('set-password-input').value;
+  const confirm = document.getElementById('set-password-confirm').value;
+  const errEl = document.getElementById('set-password-error');
+  const btn = document.getElementById('set-password-btn');
+
+  if (pwd.length < 6) {
+    errEl.textContent = 'Password must be at least 6 characters.';
+    return;
+  }
+  if (pwd !== confirm) {
+    errEl.textContent = 'Passwords do not match.';
+    return;
+  }
+
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+  errEl.textContent = '';
+
+  const { error } = await db.auth.updateUser({ password: pwd });
+  if (error) {
+    errEl.textContent = error.message;
+    btn.textContent = 'Set Password';
+    btn.disabled = false;
+    return;
+  }
+
+  window.location.hash = '';
+  showApp();
+  await loadAll();
 }
 
 function setConnUI(connected, text) {
