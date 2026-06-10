@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { createClient } from '@/lib/supabase/server'
 import { isSubscriptionActive, trialDaysLeft, type Subscription } from '@/lib/subscription'
 import Link from 'next/link'

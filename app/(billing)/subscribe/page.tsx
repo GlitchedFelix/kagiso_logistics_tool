@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { createClient } from '@/lib/supabase/server'
 import { trialDaysLeft, isSubscriptionActive, type Subscription } from '@/lib/subscription'
 import SubscribeClient from './SubscribeClient'

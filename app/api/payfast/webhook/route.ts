@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { verifyITN } from '@/lib/payfast'
+import { getSupabaseEnv } from '@/lib/env'
 
 export async function POST(request: Request) {
   try {
     const text = await request.text()
     const body = Object.fromEntries(new URLSearchParams(text))
 
-    // Verify PayFast signature
     if (!verifyITN(body)) {
-      console.error('PayFast ITN signature mismatch')
+      console.error('PayFast ITN: signature mismatch')
       return new NextResponse('Invalid signature', { status: 400 })
     }
 
@@ -17,22 +17,18 @@ export async function POST(request: Request) {
     const paymentStatus = body.payment_status
     const paymentId     = body.pf_payment_id
     const token         = body.token
-    const billingDate   = body.billing_date
 
     if (!userId) {
       return new NextResponse('Missing user ID', { status: 400 })
     }
 
-    // Determine subscription plan from amount
     const amount      = parseFloat(body.amount_gross || '0')
     const plan        = amount >= 800 ? 'annual' : 'monthly'
     const amountCents = Math.round(amount * 100)
 
-    // Use service role key to bypass RLS — only available server-side
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    )
+    // Service role key bypasses RLS — only used inside this server-side webhook
+    const { url, serviceKey } = getSupabaseEnv()
+    const supabase = createClient(url, serviceKey)
 
     if (paymentStatus === 'COMPLETE') {
       const now       = new Date()
@@ -61,8 +57,7 @@ export async function POST(request: Request) {
         .eq('user_id', userId)
     }
 
-    console.log('PayFast ITN:', { userId, paymentStatus, plan, paymentId, billingDate })
-
+    console.log('PayFast ITN processed:', { userId, paymentStatus, plan })
     return new NextResponse('OK', { status: 200 })
   } catch (err) {
     console.error('PayFast webhook error:', err)
